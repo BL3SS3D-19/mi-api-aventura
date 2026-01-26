@@ -1,5 +1,5 @@
 import express from 'express';
-import handler from './v1/hola.js';
+import handler from './api/v1/hola.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
