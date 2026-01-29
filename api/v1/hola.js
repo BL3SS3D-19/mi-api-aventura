@@ -1,9 +1,8 @@
-/*
+
 export function handler(req, res) {
-    res.status(200).json({ message: process.env.MENSAJE_BIENVENIDA, version: '1.0.0' })
+    res.status(400).json({ message: 'El parametro nombre es requerido' })
 }
 
-*/
 
 export function handlerWparam(req, res) {
     const nombre = req.params.nombre;
