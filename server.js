@@ -5,6 +5,8 @@ import { getUsuarios } from './api/v1/usuarios.js';
 import { connectDB } from './db.js';
 import { authMiddleware } from './api/middleware/auth.js';
 import { login } from './api/v1/login.js';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 
 
 
@@ -16,7 +18,7 @@ app.use(express.json());  // Para parsear JSON en el body
 
 //Swagger
 const SwaggerDocument = YAML.load('./swagger.yaml');
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(SwaggerDocument));
 
 
 app.get('/api/v1/hola', handler);
@@ -29,5 +31,4 @@ app.post("/api/v1/login", login);
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
-    console.log(process.env.JWT_SECRET_KEY);
-});
+})
