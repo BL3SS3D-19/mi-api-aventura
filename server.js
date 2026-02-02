@@ -14,6 +14,10 @@ const PORT = process.env.PORT || 3000;
 connectDB();
 app.use(express.json());  // Para parsear JSON en el body
 
+//Swagger
+const SwaggerDocument = YAML.load('./swagger.yaml');
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 app.get('/api/v1/hola', handler);
 

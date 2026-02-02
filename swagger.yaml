@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: Mi API Aventura
+  description: Documentación de la API v1
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Servidor local
+  - url: https://TU-PROYECTO.vercel.app
+    description: Servidor en Vercel
+
+paths:
+  /api/v1/hola:
+    get:
+      summary: Mensaje de bienvenida
+      responses:
+        200:
+          description: Mensaje exitoso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+
+  /api/v1/saludo:
+    get:
+      summary: Saludo personalizado
+      parameters:
+        - name: nombre
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        200:
+          description: Saludo exitoso
+        400:
+          description: Falta el parámetro nombre
+
+  /api/v1/usuarios:
+    get:
+      summary: Obtener lista de usuarios
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Lista de usuarios
+        401:
+          description: No autorizado
+
+  /api/v1/login:
+    post:
+      summary: Login y generación de token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Token generado
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
